@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,useMemo} from 'react';
+import AuthContext from './Context/AuthContext';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Login from './Components/Auth/Login';
+import MainPage from './Components/Router/MainPage';
+
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import theme from './Styles/mainTheme';
+
+const App = () => {
+    const [isLogin,setIsLogin]=useState(false);
+    const _routing=useMemo(()=>{
+        const currentComp=Boolean(isLogin)?<MainPage/>:<Login/>
+        return currentComp;
+    },[isLogin])
+
+    return (
+        <AuthContext.Provider value={{isLogin,setIsLogin}}>    
+            <MuiThemeProvider theme={theme}>
+                <div>
+                    {_routing}
+                </div>
+            </MuiThemeProvider>
+        </AuthContext.Provider>
+    );
+};
 
 export default App;
