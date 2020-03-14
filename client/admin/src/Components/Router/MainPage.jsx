@@ -2,9 +2,9 @@ import React,{useContext,useState} from 'react';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/core/styles';
 import AuthContext from '../../Context/AuthContext';
-import BannerPage from './BannerPage';
+import PortfolioMainPage from './PortfolioMainPage';
 import SocialPage from './SocialPage';
-import PortfolioPage from './PortfolioPage';
+import PartnershipMainPage from './PartnershipMainPage';
 
 const useStyles=makeStyles(theme=>({
     root:{
@@ -16,25 +16,25 @@ const useStyles=makeStyles(theme=>({
 }));
 
 const router={
-    banner:<BannerPage/>,
+    portfolio:<PortfolioMainPage/>,
     social:<SocialPage/>,
-    portfolio:<PortfolioPage/>
+    partnership:<PartnershipMainPage/>
 };
 
 const MainPage = () => {
     const classes=useStyles();
     const {setIsLogin}=useContext(AuthContext);
-    const [crtPage,setCrtPage]=useState('banner');
+    const [crtPage,setCrtPage]=useState('portfolio');
 
     return (
         <div>
             <div>
                 <Button
                     onClick={()=>{
-                        setCrtPage('banner')
+                        setCrtPage('portfolio')
                     }}
                 >
-                    Banner
+                    Portfolio
                 </Button>
                 <Button
                     onClick={()=>{
@@ -45,10 +45,10 @@ const MainPage = () => {
                 </Button>
                 <Button
                     onClick={()=>{
-                        setCrtPage('portfolio')
+                        setCrtPage('partnership')
                     }}
                 >
-                    Portfolio
+                    Partnership
                 </Button>
                 <Button
                     onClick={()=>{
