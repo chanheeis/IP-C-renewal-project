@@ -14,7 +14,8 @@ const Thumbnail = ({
     isFade,
     thumbnail,
     _deleteThumbnail,
-    _setResistData}) => {
+    _setResistData,
+    resistData}) => {
 
     const classes=useStyles();
     return (
@@ -36,6 +37,7 @@ const Thumbnail = ({
                     />
                 </div>
                 <TitleWrapper
+                    resistData={resistData}
                     _setResistData={_setResistData}
                 />            
             </div>

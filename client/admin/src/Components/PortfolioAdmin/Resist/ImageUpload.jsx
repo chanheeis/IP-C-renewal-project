@@ -25,7 +25,7 @@ const makeBase64URL=(file)=>{
     })
 };
 
-const ImageUpload = ({_setResistData}) => {
+const ImageUpload = ({_setResistData,resistData}) => {
     const classes=useStyles();
     const [thumbnail,setThumbnail]=useState(null);
     const _deleteThumbnail=()=>{
@@ -48,6 +48,7 @@ const ImageUpload = ({_setResistData}) => {
         if(Boolean(thumbnail)){
             return(
                 <Thumbnail
+                    resistData={resistData}
                     isFade={Boolean(thumbnail)}
                     thumbnail={thumbnail}
                     _deleteThumbnail={_deleteThumbnail}

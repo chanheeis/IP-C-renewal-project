@@ -9,6 +9,7 @@ const PortfolioWrapper = ({data,_deleteData}) => {
     const classes=useStyles();
     
     const {userName,modifiedDate,url,title,subtitle,date,id}=data;
+
     return (
         <div className={classes.root}>
             <Account

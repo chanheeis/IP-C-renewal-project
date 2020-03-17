@@ -15,7 +15,7 @@ const Image = ({url,title,subtitle,date,id,_deleteData}) => {
             />
             <img
                 className={classes.img}
-                alt='picture'
+                alt={title}
                 src={url}
             />
             <div className={classes.title_wrapper}>

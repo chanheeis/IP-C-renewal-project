@@ -5,7 +5,11 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import useStyles from '../Styles/Resist.TitleWrapper';
 
-const TitleWrapper = ({_setResistData}) => {
+const _isNumber=(str)=>{
+    return !isNaN(str);
+}
+
+const TitleWrapper = ({_setResistData,resistData}) => {
     const classes=useStyles();
 
     const [titleSize,setTitleSize]=useState(0);
@@ -24,6 +28,15 @@ const TitleWrapper = ({_setResistData}) => {
         }
     },[_setResistData]);
 
+    const _getDateValue=(e)=>{
+        const name=e.target.name;
+        let value=e.target.value;
+        const lastIndex=value.length-1;
+
+        if(!Boolean(value)||_isNumber(value[lastIndex])){
+            _setResistData(name,value);
+        }
+    }
     return (
         <div className={classes.title_wrapper}>
             <Typography className={classes.typo}>
@@ -61,11 +74,12 @@ const TitleWrapper = ({_setResistData}) => {
                     classes.textFiled_common,
                     classes.textFiled_3
                 )}
-                onChange={_getInputValue} 
-                placeholder="날짜를 입력하세요"
+                onChange={_getDateValue} 
+                placeholder="YYYYMMDD"
                 type="text"
                 name="date"
                 autoComplete="off"
+                value={resistData.date}
             />            
         </div>
     );

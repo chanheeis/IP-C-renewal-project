@@ -1,12 +1,17 @@
-import React,{useState,useEffect} from 'react';
-import Button from '@material-ui/core/Button'
+import React,{useState} from 'react';
+
+import Button from '@material-ui/core/Button';
 import useStyles from './MainPageStyle';
+
+import ResistRoot from '../SocialAdmin/Resist/ResistRoot';
+
+const router={
+    resist:<ResistRoot/>
+};
+
 const SocialPage = () => {
     const classes=useStyles()
     const [crtPage,setCrtPage]=useState('resist');
-    useEffect(()=>{
-        console.log(crtPage);
-    },[crtPage])
     return (
         <div>
             <h1 className={classes.title}>
@@ -18,17 +23,8 @@ const SocialPage = () => {
                     onClick={()=>setCrtPage('resist')}>
                     Resist
                 </Button>
-                <Button
-                    className={classes.btn}
-                    onClick={()=>setCrtPage('modify')}>
-                    Modify
-                </Button>
-                <Button
-                    className={classes.btn}
-                    onClick={()=>setCrtPage('delete')}>
-                    Delete
-                </Button>
             </div>
+            {router[crtPage]}
         </div>
     );
 };

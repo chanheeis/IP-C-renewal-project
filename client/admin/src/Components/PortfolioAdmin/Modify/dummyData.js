@@ -1,5 +1,6 @@
 const dummyData=[
     {
+        id:1,
         userName:'chanheeis',
         modifiedDate:'2020.03.15 PM01:00',
         url:'/static/image/image_1.jpg',
@@ -9,6 +10,7 @@ const dummyData=[
         date:'2020.01.01'
     },
     {
+        id:2,
         userName:'chanheeis',
         modifiedDate:'2020.03.15 PM01:00',
         url:'/static/image/image_2.jpg',
@@ -18,6 +20,7 @@ const dummyData=[
         date:'2020.01.01'
     },
     {
+        id:3,
         userName:'chanheeis',
         modifiedDate:'2020.03.15 PM01:00',
         url:'/static/image/image_3.jpg',
@@ -27,6 +30,7 @@ const dummyData=[
         date:'2020.01.01'
     },
     {
+        id:4,
         userName:'chanheeis',
         modifiedDate:'2020.03.15 PM01:00',
         url:'/static/image/image_4.jpg',
@@ -36,6 +40,7 @@ const dummyData=[
         date:'2020.01.01'
     },
     {
+        id:5,
         userName:'chanheeis',
         modifiedDate:'2020.03.15 PM01:00',
         url:'/static/image/image_5.jpg',
