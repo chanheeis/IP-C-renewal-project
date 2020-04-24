@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainMapper">
+	<select id="selectTime" resultType="String">
+		SELECT now()
+	</select>
+	
+	<!--데이터 조회 -->
+	<select id="selectHistory" resultType="map">
+		SELECT HIST_TITLE,
+			   HIST_CONTENT,
+			   FN_DATE_FORMAT(HIST_DATE, '. ') AS HIST_DATE
+		  FROM PORTFOLIO_HIST
+		 WHERE 1=1
+		 <if test="HIST_CONTENT != null and HIST_CONTENT != ''">
+		 	AND HIST_CONTENT = #{HIST_CONTENT}
+		 </if>
+	</select>
+	
+</mapper>
