@@ -9,12 +9,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 
 import useStyles from './Styles/Login';
-
-const dummyAuth={
-    id:'chanheeis',
-    password:'1318dkfk12!@'
-}
-
 const Login = () => {
     const classes=useStyles();
     const {setIsLogin}=useContext(AuthContext);
@@ -26,14 +20,24 @@ const Login = () => {
     }
     
     const _loginCheck=()=>{
-        if(
-            dummyAuth['id']===loginInfo['id']&&
-            dummyAuth['password']===loginInfo['password']
-        ){
-            setIsLogin(true);
-        }else{
-            alert('로그인 실패')
-        }
+        const url='/account/login';
+        const option={
+            method:'POST',
+            body:JSON.stringify(loginInfo),
+            headers:{
+                'Content-type':'application/json',
+                'Accept':'application/json'
+            }
+        };
+        fetch(url,option)
+            .then(res=>res.json())
+            .then(data=>{
+                if(data.isValid){
+                    setIsLogin(true);
+                    sessionStorage.setItem('testKey','testValue');
+                    console.log(sessionStorage.getItem('testKey'));
+                }
+            })
     }
 
     return (

@@ -13,11 +13,16 @@ const router={
 };
 
 const MainPage = () => {
+    //Contexts
     const {setIsLogin}=useContext(AuthContext);
+    
+    //States
     const [crtPage,setCrtPage]=useState('portfolio');
+    
     return (
         <div>
-            <div>
+            <div
+                style={{minWidth:'450px'}}>
                 <Button
                     onClick={()=>{setCrtPage('portfolio')}}>
                     Portfolio

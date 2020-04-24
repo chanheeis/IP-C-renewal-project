@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 
 //Material Components and methods
 import Button from '@material-ui/core/Button';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
 import Typography from '@material-ui/core/Typography';
 import useStyles from '../Styles/Resist.ImageUpload';
 
@@ -32,14 +31,15 @@ const ImageUpload = ({_setResistData,resistData}) => {
         setThumbnail(null);
         
         _setResistData('image',null);
-        _setResistData('title',null);
-        _setResistData('subtitle',null);
-        _setResistData('date',null);
+        _setResistData('title','');
+        _setResistData('subtitle','');
+        _setResistData('date','');
     };
 
     const _handleChange=async(e)=>{
         const image=e.target.files[0];
-        _setResistData('image',image)
+        _setResistData('image',image);
+        
         const result=await makeBase64URL(image);
         setThumbnail(result);
     }
@@ -80,8 +80,6 @@ const ImageUpload = ({_setResistData,resistData}) => {
 
     return (
         <div className={classes.root}>
-            <AttachFileIcon
-                className={classes.icon}/>
             {route()}
         </div>
     );

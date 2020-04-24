@@ -5,16 +5,21 @@ const useStyles=makeStyles(theme=>({
         marginRight:'10px',
         position:'relative'
     },
-    modify_icon:{
-        color:'#FFF',
+    icon:{
         position:'absolute',
         top:'50px',
         right:'20px',
         cursor:'pointer',
         zIndex:100,
+    },
+    modify_icon:{
+        color:'#FFF',
         '&:hover':{
             color:theme.palette.accent.light
         }
+    },
+    done_icon:{
+        color:'#3CB371'
     }
 }))
 export default useStyles;

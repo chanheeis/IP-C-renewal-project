@@ -1,40 +1,96 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect,useMemo,useCallback} from 'react';
+import classNames from 'classnames';
 
 import CreateIcon from '@material-ui/icons/Create';
+import CheckIcon from '@material-ui/icons/Check';
 
 import Account from './Account';
 import Image from './Image';
-import Link from './Link';
 
 import useStyles from '../Styles/Modify.PortfolioWrapper';
 
-const PortfolioWrapper = ({data,_setModifyId,modifyId}) => {
+const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
     const classes=useStyles();
-    const {userName,modifiedDate,url,title,subtitle,date,id}=data;
+    //Props
+    const {admin_id,modified_date,image_url,title,subtitle,date,id}=data;
 
+    //States
+    const [modifying,setModifying]=useState(Boolean(modifyId===id));
+
+    //Callbacks
+    const _updatePortfolio=()=>{
+        if(modifyId===data.id){
+            console.log(data);
+            const url='/portfolio/modify';
+            fetch(url,{
+                method:'POST',
+                body:JSON.stringify(data),
+                headers:{
+                    'Content-Type':'application/json',
+                    'Accept':'application/json'
+                }
+            })
+            .then(res=>res.json())
+            .then(data=>console.log(data));
+        }
+    }
+    useEffect(()=>{
+        console.log(data);
+    },[data])
+    //Memos
+    const icon=useMemo(()=>{
+        if(Boolean(modifying)&&Boolean(modifyId===id)){
+            return(
+                <CheckIcon
+                    className={classNames(
+                        classes.icon,
+                        classes.done_icon
+                    )}
+                    onClick={()=>{
+                        _setModifyId(null);
+                        setModifying(prev=>!prev);
+                        _updatePortfolio();
+                    }}
+                />
+            )
+        }else{
+            return( 
+                <CreateIcon
+                    className={classNames(
+                        classes.icon,
+                        classes.modify_icon
+                    )}
+                    onClick={()=>{
+                        _setModifyId(id);
+                        setModifying(prev=>!prev);
+                    }}            
+                />
+            )
+        }
+    },[modifying,modifyId,id,classes,_setModifyId]);
+
+    //Effects
+    useEffect(()=>{
+        if(id!==modifyId){
+            setModifying(false);
+        }
+    },[modifyId,id])
+    
     return (
         <div className={classes.root}>
-            <CreateIcon
-                className={classes.modify_icon}
-                onClick={()=>{
-                    const temp=Boolean(modifyId===id)?null:id;
-                    _setModifyId(temp);
-                }}            
-            />
+            {icon}
             <Account
-                userName={userName}
-                modifiedDate={modifiedDate}
+                admin_id={admin_id}
+                modified_date={modified_date}
             />
             <Image
+                _setDataList={_setDataList}
                 modifying={Boolean(modifyId===id)}
                 id={id}
-                url={url}
+                image_url={image_url}
                 title={title}
                 subtitle={subtitle}
                 date={date}
-            />
-            <Link
-                modifying={Boolean(modifyId===id)}
             />
         </div>
     );

@@ -20,7 +20,9 @@ const ProtfolioMainPage = () => {
             <h1 className={classes.title}>
                 Protfolio Admin Page
             </h1>
-            <div className={classes.btn_wrapper}>
+            <div 
+                className={classes.btn_wrapper}
+                style={{minWidth:'1300px'}}>
                 <Button
                     className={classes.btn}
                     onClick={()=>setCrtPage('resist')}>

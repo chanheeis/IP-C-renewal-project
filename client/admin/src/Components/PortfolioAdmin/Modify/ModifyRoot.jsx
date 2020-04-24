@@ -6,7 +6,6 @@ import React,{
     useCallback
 } from 'react';
 import Slider from 'react-slick';
-import dummyData from './dummyData';
 
 import useStyles from '../Styles/Modify.ModifyRoot';
 import PortfolioWrapper from '../Modify/PortfolioWrapper';
@@ -26,6 +25,16 @@ const ModifyRoot = () => {
         setModifyId(id);
     },[]);
 
+    const _setDataList=(id,name,value)=>{
+        setDataList(dataList.map(data=>{
+            if(id===data.id){
+                return {...data,[name]:value};
+            }else{
+                return data;
+            }
+        }))
+    }
+    
     //Memos
     const sliderOpt=useMemo(()=>{
         return {
@@ -47,6 +56,7 @@ const ModifyRoot = () => {
                 return(
                     <div key={index}>
                         <PortfolioWrapper
+                            _setDataList={_setDataList}
                             _setModifyId={_setModifyId}
                             modifyId={modifyId}
                             modifying={Boolean(modifyId===data.id)}
@@ -84,17 +94,23 @@ const ModifyRoot = () => {
 
     //Effects
     useEffect(()=>{
-        //Set initial dataList
-        if(!Boolean(dataList)){
-            setDataList(dummyData)
-        }
+        const url='/portfolio/modify';
+        fetch(url,{
+            method:'GET',
+            headers:{
+                'Accept':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
+                setDataList(data.response);
+            }
+        })
+    },[])
+    useEffect(()=>{
         console.log(dataList);
     },[dataList])
-
-    useEffect(()=>{
-        console.log(modifyId);
-    },[modifyId])
-
     return (
         <div className={classes.root}>
             <h1 className={classes.title}>
