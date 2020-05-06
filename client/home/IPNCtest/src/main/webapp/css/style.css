@@ -120,11 +120,21 @@ footer{
 .pf_box2 .pf_title {font-size:33px; font-weight:bold}
 .pf_box2 .pf_datail:before {content:"_______\A\A"; white-space: pre; height:20px}
 .pf_box2 .pf_datail {font-size:18px;}
-.pf_date {position:absolute;left:0;bottom:5px; width:100%; font-size:14px; text-align:center}
+.pf_date {position:relative;overflow:hidden;left:0;bottom:5px; width:100%; font-size:14px; text-align:center}
+
 
 /* contact */
 
 .wrap_map {width:900px; margin:140px auto 0;}
+
+/* contact Inform Popup */
+
+.wrap {position: absolute;left: 0;bottom: 40px;width: 90px;height: 50px;margin-left:-44px;text-align: left;overflow: hidden;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 90px;height: 25px;padding:7px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;font-size: 18px;font-weight: bold;}
+.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 
 /* footer */
 

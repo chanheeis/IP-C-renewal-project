@@ -9,6 +9,7 @@
 	<title>IP&C</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css" />	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84"></script>
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
@@ -147,56 +148,66 @@
         </footer>
     </div>
 </body>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84"></script>
+
 <script type="text/javascript">
-	var container = document.getElementById('comp_map'),
-    options = {
-         center: new kakao.maps.LatLng(37.3824971,126.6551811),
-         level: 3
-    };
- 
-	var map = new kakao.maps.Map(container, options);
+var overlay = null;
+var container = document.getElementById('comp_map'),
+options = {
+     center: new kakao.maps.LatLng(37.3824971,126.6551811),
+     level: 3
+};
 
-	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(37.3824267,126.65557); 
+var map = new kakao.maps.Map(container, options);
 
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition
+//마커가 표시될 위치입니다 
+var markerPosition  = new kakao.maps.LatLng(37.3824267,126.65557); 
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map);
+
+function markerInform() {
+	debugger;
+	var content = '<div class="wrap">' + 
+    '    <div class="info">' + 
+    '            IP&C' + 
+    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
+    '    </div>' +    
+    '</div>';
+	
+    if(!overlay){
+    	//마커 위에 커스텀오버레이를 표시합니다
+    	//마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+    	overlay = new kakao.maps.CustomOverlay({
+    		content: content,
+    		map: map,
+    		position: marker.getPosition()       
+    	});
+    }
+	
+	//마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+	kakao.maps.event.addListener(marker, 'click', function() {
+		overlay.setMap(map);
 	});
+	
+	
+};
 
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
+//커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+function closeOverlay() {
+	overlay.setMap(null);     
+};
+
+markerInform();
+
+$('#comp_map').find('area').click(function(){
+	markerInform();
+});
+
 
 </script>
 </html>
-<%-- <html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
-
-<table>
-	<thead>
-		<tr>
-			<th>title</th>
-			<th>content</th>
-			<th>date</th>
-		</tr>
-	</thead>
-	<tbody>
-           <c:forEach var="data" items="${historyList}" varStatus="status">
-               <tr>
-                   <td>${data.HIST_TITLE}</td>
-                   <td>${data.HIST_CONTENT}</td>
-                   <td>${data.HIST_DATE}</td>
-               </tr>
-           </c:forEach>
-	</tbody>
-</table>
-</body>
-</html>
- --%>
