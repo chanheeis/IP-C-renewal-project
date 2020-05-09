@@ -10,7 +10,7 @@ import {MuiThemeProvider} from '@material-ui/core/styles';
 import theme from './Styles/mainTheme';
 
 const App = () => {
-    const [isLogin,setIsLogin]=useState(true);
+    const [isLogin,setIsLogin]=useState(false);
     const _routing=useMemo(()=>{
         const currentComp=Boolean(isLogin)?<MainPage/>:<Login/>
         return currentComp;

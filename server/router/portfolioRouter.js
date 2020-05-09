@@ -58,6 +58,24 @@ router.post('/resist',cpUpload,(req,res)=>{
     })
 });
 
+router.get('/delete',(req,res)=>{
+    const query=`SELECT * FROM PORTFOLIO`;
+    conn.query(query,(err,result)=>{
+        const resMsg=Boolean(err)?'DB_QUERY_FAIL':result;
+        res.json({response:resMsg});
+    });
+});
+
+router.post('/delete',(req,res)=>{
+    const id=req.body.id;
+    const query=`DELETE FROM PORTFOLIO WHERE id=?`;
+    const queryParam=[id];
+    conn.query(query,queryParam,(err,result)=>{
+        const resMsg=Boolean(err)?'DB_QUER_FAIL':result;
+        res.json({response:resMsg});
+    })
+});
+
 router.get('/modify',(req,res)=>{
     const query=`SELECT * FROM PORTFOLIO`;
     conn.query(query,(err,result)=>{
@@ -67,7 +85,6 @@ router.get('/modify',(req,res)=>{
 })
 
 router.post('/modify',(req,res)=>{
-    console.log(req.body);
     const query=`
         UPDATE PORTFOLIO SET
         title=? , subtitle=? , date=?
@@ -76,9 +93,8 @@ router.post('/modify',(req,res)=>{
     const {title,subtitle,date,id}=req.body;
     const queryArr=[title,subtitle,date,id];
     conn.query(query,queryArr,(err,result)=>{
-        if(err) console.log(err);
         const resMsg=Boolean(err)?'DB_QUERY_FAIL':result;
-        console.log(resMsg);
+        res.json({response:resMsg});
     })
 })
 

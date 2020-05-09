@@ -92,7 +92,6 @@ const ModifyRoot = () => {
         return;
     },[dataList,crtBtn,sliderEl,classes])
 
-    //Effects
     useEffect(()=>{
         const url='/portfolio/modify';
         fetch(url,{
@@ -108,9 +107,11 @@ const ModifyRoot = () => {
             }
         })
     },[])
+
     useEffect(()=>{
         console.log(dataList);
     },[dataList])
+    
     return (
         <div className={classes.root}>
             <h1 className={classes.title}>

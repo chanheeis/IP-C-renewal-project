@@ -13,12 +13,12 @@ const Login = () => {
     const classes=useStyles();
     const {setIsLogin}=useContext(AuthContext);
     const [loginInfo,setLoginInfo]=useState({});
+    
     const _setLoginInfo=(name,value)=>{
         setLoginInfo(prev=>{
             return {...prev,[name]:value}
         })
     }
-    
     const _loginCheck=()=>{
         const url='/account/login';
         const option={
@@ -30,14 +30,15 @@ const Login = () => {
             }
         };
         fetch(url,option)
-            .then(res=>res.json())
-            .then(data=>{
-                if(data.isValid){
-                    setIsLogin(true);
-                    sessionStorage.setItem('testKey','testValue');
-                    console.log(sessionStorage.getItem('testKey'));
-                }
-            })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.isValid===false){
+                alert('계정을 다시 확인해주세요');
+            }
+            if(data.isValid){
+                setIsLogin(true);
+            }
+        })
     }
 
     return (

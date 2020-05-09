@@ -6,30 +6,36 @@ import React,{
     useEffect
 } from 'react';
 import Slider from 'react-slick';
-import dummyData from './dummyData';
-
 import useStyles from '../Styles/Delete.DeleteRoot';
-
 import PortfolioWrapper from './PortfolioWrapper';
 
 const DeleteRoot = () => {
     const classes=useStyles();
-
-    //Refs
     const sliderEl=useRef(null);
-
-    //States
     const [crtBtn,setCrtBtn]=useState(0);
     const [dataList,setDataList]=useState(null);
     
-    //Callbacks
     const _deleteData=useCallback((id)=>{
-        setDataList(dataList.filter(data=>{
-            return data.id!==id;
-        }))
+        const url='/portfolio/delete';
+        fetch(url,{
+            method:'POST',
+            body:JSON.stringify({id:id}),
+            headers:{
+                'Content-Type':'application/json',
+                'Accept':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.response!=='DB_QUERY_FAIL'){
+                alert('DELETE SUCCESS!!');
+                setDataList(dataList.filter(data=>{
+                    return data.id!==id;
+                })) 
+            }
+        })
     },[dataList])
 
-    //Memos
     const sliderOpt=useMemo(()=>{
         return {
             dots:false,
@@ -83,10 +89,23 @@ const DeleteRoot = () => {
         return;
     },[dataList,crtBtn,sliderEl,classes])
 
-    //Effects
     useEffect(()=>{
-        setDataList(dummyData)
+        const url='/portfolio/delete';
+        fetch(url,{
+            method:'GET',
+            headers:{
+                'Accept':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
+                setDataList(data.response);
+            }
+        });
     },[])
+
     return (
         <div className={classes.root}>
             <h1 className={classes.title}>

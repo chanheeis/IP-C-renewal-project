@@ -20,7 +20,6 @@ const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
     //Callbacks
     const _updatePortfolio=()=>{
         if(modifyId===data.id){
-            console.log(data);
             const url='/portfolio/modify';
             fetch(url,{
                 method:'POST',
@@ -31,13 +30,12 @@ const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
                 }
             })
             .then(res=>res.json())
-            .then(data=>console.log(data));
+            .then(data=>{
+                //DB Query error 처리 필요
+            });
         }
     }
-    useEffect(()=>{
-        console.log(data);
-    },[data])
-    //Memos
+    
     const icon=useMemo(()=>{
         if(Boolean(modifying)&&Boolean(modifyId===id)){
             return(

@@ -7,19 +7,20 @@ import useStyles from '../Styles/Delete.PortfolioWrapper';
 
 const PortfolioWrapper = ({data,_deleteData}) => {
     const classes=useStyles();
-    
-    const {userName,modifiedDate,url,title,subtitle,date,id}=data;
-
+    const {
+        admin_id,modified_date,
+        id,date,image_url,title,subtitle
+    }=data;
     return (
         <div className={classes.root}>
             <Account
-                userName={userName}
-                modifiedDate={modifiedDate}
+                userName={admin_id}
+                modifiedDate={modified_date}
             />
             <Image
                 _deleteData={_deleteData}
                 id={id}
-                url={url}
+                url={image_url}
                 title={title}
                 subtitle={subtitle}
                 date={date}
