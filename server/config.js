@@ -1,0 +1,12 @@
+module.exports={
+    process:{
+        PORT:5000
+    },
+    database:{
+        host:'13.125.18.113',
+        user:'root',
+        password:'IPNCdnjswn13!!',
+        database:'ipnc_db',
+        connectTimeout:30000
+    }
+}
