@@ -9,7 +9,7 @@
 	<title>IP&C</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css" />	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84&libraries=services"></script>
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
