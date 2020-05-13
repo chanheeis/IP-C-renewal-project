@@ -9,6 +9,7 @@
 	<title>IP&C</title>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css" />	
+    <link rel="stylesheet" href="css/button.css" />
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84&libraries=services"></script>
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
@@ -17,6 +18,7 @@
 	<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
 	<script type="text/javascript" src="js/custom.js"></script>
 </head>
+
 <body>
     <div id="wrap">
         <header>
@@ -123,6 +125,9 @@
                     </ul>
                 </div>
             </div>
+	        <div class="btn_area">
+	            <button class="bttn-material-circle bttn-md bttn-primary">∨</button>
+	        </div>
         </section>
         <!--four area : map-->
         <section class="contents map_area">
@@ -171,7 +176,6 @@ var marker = new kakao.maps.Marker({
 marker.setMap(map);
 
 function markerInform() {
-	debugger;
 	var content = '<div class="wrap">' + 
     '    <div class="info">' + 
     '            IP&C' + 

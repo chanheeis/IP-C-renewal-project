@@ -8,13 +8,13 @@
 	
 	<!--데이터 조회 -->
 	<select id="selectHistory" resultType="map">
-		SELECT HIST_TITLE,
-			   HIST_CONTENT,
-			   FN_DATE_FORMAT(HIST_DATE, '. ') AS HIST_DATE
-		  FROM PORTFOLIO_HIST
+		SELECT title AS HIST_TITLE,
+			   subtitle AS HIST_CONTENT,
+			   date_format(date,  '%Y.%m.%d') AS HIST_DATE
+		  FROM PORTFOLIO
 		 WHERE 1=1
 		 <if test="HIST_CONTENT != null and HIST_CONTENT != ''">
-		 	AND HIST_CONTENT = #{HIST_CONTENT}
+		 	AND subtitle = #{HIST_CONTENT}
 		 </if>
 	</select>
 	
