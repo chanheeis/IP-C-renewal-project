@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import useStyles from '../Styles/Resist.TitleWrapper';
 
-const _isNumber=(str)=>{
-    return !isNaN(str);
-}
-
 const TitleWrapper = ({_setResistData,resistData}) => {
     const classes=useStyles();
 
@@ -29,12 +25,26 @@ const TitleWrapper = ({_setResistData,resistData}) => {
     },[_setResistData]);
 
     const _getDateValue=(e)=>{
-        const name=e.target.name;
         let value=e.target.value;
-        const lastIndex=value.length-1;
 
-        if(!Boolean(value)||_isNumber(value[lastIndex])){
+        const year=value.substring(0,4);
+        const month=value.substring(5,7);
+        const day=value.substring(8);
+        const date=Number(year+month+day);
+
+        if(!Number.isNaN(date)&&value.length<=10){
+            const name=e.target.name;
             _setResistData(name,value);
+        }
+    }
+    const _insertDash=(e)=>{
+        const keyCode=e.which||e.keyCode;
+        if(keyCode===8 || keyCode===46){
+            return;
+        }else{
+            const name=e.target.name;
+            const insert=resistData[name].length===4 || resistData[name].length===7?'-':'';
+            _setResistData(name,resistData[name]+insert);
         }
     }
     return (
@@ -74,8 +84,9 @@ const TitleWrapper = ({_setResistData,resistData}) => {
                     classes.textFiled_common,
                     classes.textFiled_3
                 )}
-                onChange={_getDateValue} 
-                placeholder="YYYYMMDD"
+                onKeyDown={_insertDash}
+                onChange={_getDateValue}
+                placeholder="YYYY-MM-DD"
                 type="text"
                 name="date"
                 autoComplete="off"

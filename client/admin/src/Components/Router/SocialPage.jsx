@@ -3,7 +3,7 @@ import React,{useState} from 'react';
 import Button from '@material-ui/core/Button';
 import useStyles from './MainPageStyle';
 
-import ResistRoot from '../SocialAdmin/Resist/ResistRoot';
+import ResistRoot from '../SocialAdmin/ResistRoot';
 
 const router={
     resist:<ResistRoot/>

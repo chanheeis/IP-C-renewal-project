@@ -15,9 +15,11 @@ const router={
 const MainPage = () => {
     const {setIsLogin}=useContext(AuthContext);
     const [crtPage,setCrtPage]=useState('portfolio');
+    
     return (
         <div>
-            <div>
+            <div
+                style={{minWidth:'450px'}}>
                 <Button
                     onClick={()=>{setCrtPage('portfolio')}}>
                     Portfolio
@@ -31,7 +33,10 @@ const MainPage = () => {
                     Partnership
                 </Button>
                 <Button
-                    onClick={()=>{setIsLogin(false);}}>
+                    onClick={()=>{
+                        setIsLogin(false);
+                        localStorage.removeItem('isLogin');
+                    }}>
                     Logout
                 </Button>
             </div>

@@ -6,27 +6,48 @@ import React,{
     useCallback
 } from 'react';
 import Slider from 'react-slick';
-import dummyData from './dummyData';
 
 import useStyles from '../Styles/Modify.ModifyRoot';
 import PortfolioWrapper from '../Modify/PortfolioWrapper';
 
 const ModifyRoot = () => {
     const classes=useStyles();  
-    //Refs
     const sliderEl=useRef(null);
-
-    //States
     const [dataList,setDataList]=useState(null);
     const [modifyId,setModifyId]=useState(null);
     const [crtBtn,setCrtBtn]=useState(0);
     
-    //Callbacks
     const _setModifyId=useCallback((id)=>{
         setModifyId(id);
     },[]);
 
-    //Memos
+    const _loadPortfolioList=useCallback(()=>{
+        const url='/portfolio/modify';
+        fetch(url,{
+            method:'GET',
+            headers:{
+                'Accept':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
+                setDataList(data.response);
+            }
+        });
+    },[setDataList]);
+
+    const _setDataList=(id,name,value)=>{
+        console.log(dataList);
+        setDataList(dataList.map(data=>{
+            if(id===data.id){
+                return {...data,[name]:value};
+            }else{
+                return data;
+            }
+        }))
+    }
+
     const sliderOpt=useMemo(()=>{
         return {
             dots:false,
@@ -47,11 +68,13 @@ const ModifyRoot = () => {
                 return(
                     <div key={index}>
                         <PortfolioWrapper
+                            _setDataList={_setDataList}
                             _setModifyId={_setModifyId}
                             modifyId={modifyId}
                             modifying={Boolean(modifyId===data.id)}
                             data={data}
                             key={index}
+                            _loadPortfolioList={_loadPortfolioList}
                         />
                     </div>
                 )
@@ -82,18 +105,9 @@ const ModifyRoot = () => {
         return;
     },[dataList,crtBtn,sliderEl,classes])
 
-    //Effects
     useEffect(()=>{
-        //Set initial dataList
-        if(!Boolean(dataList)){
-            setDataList(dummyData)
-        }
-        console.log(dataList);
-    },[dataList])
-
-    useEffect(()=>{
-        console.log(modifyId);
-    },[modifyId])
+        _loadPortfolioList();
+    },[]);
 
     return (
         <div className={classes.root}>
