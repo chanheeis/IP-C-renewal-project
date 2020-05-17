@@ -12,20 +12,33 @@ import PortfolioWrapper from '../Modify/PortfolioWrapper';
 
 const ModifyRoot = () => {
     const classes=useStyles();  
-    //Refs
     const sliderEl=useRef(null);
-
-    //States
     const [dataList,setDataList]=useState(null);
     const [modifyId,setModifyId]=useState(null);
     const [crtBtn,setCrtBtn]=useState(0);
     
-    //Callbacks
     const _setModifyId=useCallback((id)=>{
         setModifyId(id);
     },[]);
 
+    const _loadPortfolioList=useCallback(()=>{
+        const url='/portfolio/modify';
+        fetch(url,{
+            method:'GET',
+            headers:{
+                'Accept':'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
+                setDataList(data.response);
+            }
+        });
+    },[setDataList]);
+
     const _setDataList=(id,name,value)=>{
+        console.log(dataList);
         setDataList(dataList.map(data=>{
             if(id===data.id){
                 return {...data,[name]:value};
@@ -34,8 +47,7 @@ const ModifyRoot = () => {
             }
         }))
     }
-    
-    //Memos
+
     const sliderOpt=useMemo(()=>{
         return {
             dots:false,
@@ -62,6 +74,7 @@ const ModifyRoot = () => {
                             modifying={Boolean(modifyId===data.id)}
                             data={data}
                             key={index}
+                            _loadPortfolioList={_loadPortfolioList}
                         />
                     </div>
                 )
@@ -93,25 +106,9 @@ const ModifyRoot = () => {
     },[dataList,crtBtn,sliderEl,classes])
 
     useEffect(()=>{
-        const url='/portfolio/modify';
-        fetch(url,{
-            method:'GET',
-            headers:{
-                'Accept':'application/json'
-            }
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
-                setDataList(data.response);
-            }
-        })
-    },[])
+        _loadPortfolioList();
+    },[]);
 
-    useEffect(()=>{
-        console.log(dataList);
-    },[dataList])
-    
     return (
         <div className={classes.root}>
             <h1 className={classes.title}>

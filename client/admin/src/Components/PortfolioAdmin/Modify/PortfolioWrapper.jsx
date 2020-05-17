@@ -9,16 +9,12 @@ import Image from './Image';
 
 import useStyles from '../Styles/Modify.PortfolioWrapper';
 
-const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
+const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList,_loadPortfolioList}) => {
     const classes=useStyles();
-    //Props
     const {admin_id,modified_date,image_url,title,subtitle,date,id}=data;
-
-    //States
     const [modifying,setModifying]=useState(Boolean(modifyId===id));
-
-    //Callbacks
-    const _updatePortfolio=()=>{
+    
+    const _updatePortfolio=useCallback(()=>{
         if(modifyId===data.id){
             const url='/portfolio/modify';
             fetch(url,{
@@ -30,11 +26,14 @@ const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
                 }
             })
             .then(res=>res.json())
-            .then(data=>{
-                //DB Query error 처리 필요
+            .then((data)=>{
+                if(data.response!=='DB_QUERY_FAIL'){
+                    // _loadPortfolioList();
+                    alert('UPDATE SUCCESS!!');
+                }
             });
         }
-    }
+    },[modifyId,data])
     
     const icon=useMemo(()=>{
         if(Boolean(modifying)&&Boolean(modifyId===id)){
@@ -65,9 +64,8 @@ const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
                 />
             )
         }
-    },[modifying,modifyId,id,classes,_setModifyId]);
+    },[modifying,id,classes,modifyId,_setModifyId]);
 
-    //Effects
     useEffect(()=>{
         if(id!==modifyId){
             setModifying(false);
@@ -85,6 +83,8 @@ const PortfolioWrapper = ({data,modifyId,_setModifyId,_setDataList}) => {
                 _setDataList={_setDataList}
                 modifying={Boolean(modifyId===id)}
                 id={id}
+                admin_id={admin_id}
+                modified_date={modified_date}
                 image_url={image_url}
                 title={title}
                 subtitle={subtitle}

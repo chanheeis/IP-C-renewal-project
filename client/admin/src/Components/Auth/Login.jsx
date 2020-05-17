@@ -36,6 +36,7 @@ const Login = () => {
                 alert('계정을 다시 확인해주세요');
             }
             if(data.isValid){
+                localStorage.setItem('isLogin',true);   
                 setIsLogin(true);
             }
         })

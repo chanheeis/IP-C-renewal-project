@@ -27,8 +27,4 @@ app.listen(config.process.PORT,()=>{
     console.log(`Server is running on ${config.process.PORT}...`); 
 });
 
-app.get('/',(req,res)=>{
-    res.send('Home Page');
-});
-
 

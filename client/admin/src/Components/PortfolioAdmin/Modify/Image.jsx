@@ -121,11 +121,7 @@ const Image = ({id,image_url,title,subtitle,date,modifying,_setDataList}) => {
                 {titleComp()}
                 <span className={classes.separator}/>
                 {subTitleComp()}
-                {dateComp()}
-
-                <Typography className={classes.name_typo}>
-                    image_1.jpg
-                </Typography>            
+                {dateComp()}            
             </div>            
         </div>
     );

@@ -23,16 +23,16 @@ const useStyles=makeStyles(theme=>({
     }
 }))
 
-const Account = ({userName,modifiedDate}) => {
+const Account = ({admin_id,modified_date}) => {
     const classes=useStyles();
     return (
         <div className={classes.root}>
             <AccountCircleIcon className={classes.icon}/>
             <Typography className={classes.typo}>
-                {userName}
+                {admin_id}
             </Typography>
             <Typography className={classes.typo}>
-                {modifiedDate}
+                {modified_date}
             </Typography>
         </div>
     );
