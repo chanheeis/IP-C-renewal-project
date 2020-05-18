@@ -44,13 +44,13 @@ router.post('/resist',cpUpload,(req,res)=>{
     thumb(thumbOpt,(files,err,stdout,stderr)=>{
         const image_url=`static/uploads/image/${req.fileName}`;
         const thumbnail_url=`static/uploads/thumbnail/${req.fileName}`;
-        const {title,subtitle,date}=req.body;
+        const {title,subtitle,date,linked_url}=req.body;
         const query=`
             INSERT INTO PORTFOLIO 
-            (admin_id,title,subtitle,date,image_url,thumbnail_url) 
-            VALUES (?,?,?,?,?,?)
+            (admin_id,title,subtitle,date,image_url,thumbnail_url,linked_url) 
+            VALUES (?,?,?,?,?,?,?)
         `;
-        const queryArr=['admin',title,subtitle,date,image_url,thumbnail_url];
+        const queryArr=['admin',title,subtitle,date,image_url,thumbnail_url,linked_url];
         conn.query(query,queryArr,(err,result)=>{
             const resMsg=Boolean(err)?'DB_QUERY_FAIL':'DB_QUERY_SUCCESS';
             res.json({response:resMsg});
@@ -102,12 +102,14 @@ router.post('/modify',(req,res)=>{
     `;
     const {title,subtitle,date,id}=req.body;
     const queryArr=[title,subtitle,date,id];
+
     console.log(`
         title : ${title}
         subTitle : ${subtitle}
         date : ${date}
         id : ${id}
     `);
+    
     conn.query(query,queryArr,(err,result)=>{
         const resMsg=Boolean(err)?'DB_QUERY_FAIL':result;
         res.json({response:resMsg});

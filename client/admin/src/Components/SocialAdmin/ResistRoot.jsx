@@ -1,83 +1,58 @@
-import React,{useState,useEffect} from 'react';
-import dummyData from './dummyData';
-
-import {makeStyles} from '@material-ui/core/styles';
+import React,{useState,useEffect,useMemo,useCallback} from 'react';
+import useStyles from './Styles/ResistRoot';
 import ResistForm from './ResistForm';
-
-const useStyles=makeStyles(theme=>({
-    root:{
-        width:'100%',
-        height:'100vw',
-        paddingBottom:'50px',
-        display:'flex',
-        flexFlow:'column nowrap',
-        alignItems:'center',
-        background:theme.palette.primary.main
-    },
-    title:{
-        color:'#FFF',
-        paddingLeft:'10px',
-        borderLeft:`5px solid #FFF`,
-        marginLeft:'20px',
-        alignSelf:'flex-start',
-        fontSize:'20px'
-    },
-    wrapper:{
-        width:'700px',
-        display:'flex',
-        flexFlow:'column nowrap',
-        alignItems:'center'
-    }
-}))
 
 const ResistRoot = () => {
     const classes=useStyles();
-    const [data,setData]=useState(null);
+    const [socialInfoList,setSocialInfoList]=useState([]);
     
-    const _setData=(name,value)=>{
-        setData(prev=>{
-            return {...prev,[name]:value}
-        })
-    };
-
-    const _getLink=(channel)=>{
-        if(Boolean(data)&&data.hasOwnProperty(channel)){
-            return data[channel];
-        }else{
-            return null
+    const _updateSocialInfo=useCallback((channel,url)=>{
+        let updatedArr=[...socialInfoList];
+        for(let i = 0;i<updatedArr.length;i++) {
+            if(updatedArr[i].channel===channel) {
+                updatedArr[i].url=url;
+                break;
+            }
         }
-    }
+        setSocialInfoList(updatedArr);
+    },[setSocialInfoList,socialInfoList]);
 
+    const resistForm=useMemo(()=>{
+        if(socialInfoList.length>0){
+            return socialInfoList.map((socialInfo,index)=>{
+                return (
+                    <ResistForm 
+                        key={index}
+                        channel={socialInfo.channel}
+                        url={socialInfo.url}
+                        _updateSocialInfo={_updateSocialInfo}
+                    />
+                )
+            })
+        }else{
+            return <p>Loading...</p>
+        }
+    },[socialInfoList,_updateSocialInfo])
+    
     useEffect(()=>{
-        setData(dummyData);
+        fetch('/social/resist')
+        .then(res=>res.json())
+        .then(res=>{
+            if(res.response==='DB_QUERY_SUCCESS'){
+                setSocialInfoList(res.data);
+            }else{
+                alert('Error occured during fetch [Social info]');
+            }
+        });
     },[]);
-
-    useEffect(()=>{
-        console.log(data);
-    },[data]);
-
+    
     return (
         <div className={classes.root}>
             <h1 className={classes.title}>
                 Social Resist Page
             </h1>
             <div className={classes.wrapper}>
-                <ResistForm 
-                    logo="naver"
-                    link={_getLink('naver')}
-                    _setData={_setData}/>
-                <ResistForm 
-                    logo="youtube"
-                    link={_getLink('youtube')}
-                    _setData={_setData}/>
-                <ResistForm 
-                    logo="facebook"
-                    link={_getLink('facebook')}
-                    _setData={_setData}/>
-                <ResistForm 
-                    logo="instagram"
-                    link={_getLink('instagram')}
-                    _setData={_setData}/>
+                {resistForm}
             </div>
         </div>
     );

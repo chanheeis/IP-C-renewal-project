@@ -4,9 +4,6 @@ import useStyles from './MainPageStyle';
 const PartnershipMainPage = () => {
     const classes=useStyles();
     const [crtPage,setCrtPage]=useState('resist');
-    useEffect(()=>{
-        console.log(crtPage);
-    },[crtPage])
     return (
         <div>
             <h1 className={classes.title}>

@@ -16,11 +16,11 @@ const LinkUpload = ({_setResistData}) => {
     return (
         <div className={classes.text_wrapper}>
             <Typography className={classes.title}>
-                사진에 첨부할 링크를 입력하세요
+                포트폴리오와 연결할 유튜브 링크를 입력하세요. (선택)
             </Typography>
             <input
                 className={classes.textField}
-                name="link" 
+                name="linked_url" 
                 type="text"
                 spellCheck={false}
                 placeholder="https://"

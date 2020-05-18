@@ -99,7 +99,6 @@ const DeleteRoot = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
             if(Boolean(data)&&data!=='DB_QUERY_FAIL'){
                 setDataList(data.response);
             }

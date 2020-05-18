@@ -7,6 +7,7 @@ import useStyles from '../Styles/Resist.ResistRoot';
 import ImageUpload from './ImageUpload';
 import AccountInfo from './AccountInfo';
 import LoadingPage from './LoadingPage';
+import LinkUpload from './LinkUpload';
 
 const ResistRoot = () => {
     const classes=useStyles();
@@ -20,7 +21,8 @@ const ResistRoot = () => {
         })
     };
 
-    const _submitResistData=()=>{
+    const _submitResistData=(event)=>{
+        event.preventDefault();
         setLoading(true);
         const formData=new FormData();
         for(var key in resistData){
@@ -35,8 +37,10 @@ const ResistRoot = () => {
             }
         })
         .then(res=>res.json())
-        .then(data=>{
-            console.log(data)
+        .then(res=>{
+            if(res.response==='DB_QUERY_FAIL'){
+                alert('포트폴리오 등록에 실패했습니다.');
+            }
             setLoading(false);
         });
     }
@@ -90,6 +94,9 @@ const ResistRoot = () => {
                     _setResistData={_setResistData}
                 />
             }
+            <LinkUpload
+                _setResistData={_setResistData}
+            />
             <Button
                 className={disable?classes.disable_btn:classes.submit_btn}
                 disabled={disable}

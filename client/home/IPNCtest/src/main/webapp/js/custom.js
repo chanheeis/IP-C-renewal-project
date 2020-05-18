@@ -1,12 +1,8 @@
 $(document).ready(function(){
-
-var ht=$(window).height();
-$('section').height(ht);
-    
+    var ht=$(window).height();
+    $('section').height(ht);
 //클릭시
     $('.menu li').on("click",function(e){
-       
-        
         $('.menu li').removeClass("on");
         $(this).addClass("on");
         
@@ -26,13 +22,12 @@ $('section').height(ht);
     });
     //브라우저가 리사이즈 될 때마다 브라우저와 section의 높이값읗 갱신 
     $(window).on("resize",function(){
-        var ht=$(window).height();
-        $('section').height(ht);
-   //     window.location.reload();
+      var ht=$(window).height();
+      $('section').height(ht);
+      var historyHe = $(".company_history_area").height();
+      $(".company_history_area").height(historyHe);
     });
 
-
-    
     $("section").on("mousewheel",function(event,delta){
 	   
     if(delta>0){ //올렸을때
@@ -40,10 +35,8 @@ $('section').height(ht);
         var prev=$(this).prev().offset().top;
        //문서 전체를 prev에 저장된 위치로 이동
          $("html,body").stop().animate({"scrollTop":prev},1400,"easeOutQuart");
-        
-	   
 	}else if(delta<0){//내렸을때
-        //변수 prev에 현재 휠을 움직인 section에서 이전 section의 offset().top위치저장;
+      //변수 prev에 현재 휠을 움직인 section에서 이전 section의 offset().top위치저장;
         var next=$(this).next().offset().top;
        //문서 전체를 prev에 저장된 위치로 이동
          $("html,body").stop().animate({"scrollTop":next},1400,"easeOutQuart");
