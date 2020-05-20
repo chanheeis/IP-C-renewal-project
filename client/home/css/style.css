@@ -126,6 +126,7 @@ section.contents.main_area {}
 .pf_list {display: inline-block;width:410px;height:550px;color:#fff;box-shadow:1px 1px 16px #C5C5C5;background-color:#F2BFBF;vertical-align: top;}
 .pf_list:nth-child(2n) {
     margin-top: 150px;
+    margin-left: 90px;
 }
 .pf_list:nth-child(3) {position:absolute;left:0;top:800px; background-color:#E6B1B1}
 .pf_list:nth-child(4) {position:absolute;right:0;top:1000px; background-color:#E2A8A8}
