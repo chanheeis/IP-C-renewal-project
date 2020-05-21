@@ -12,7 +12,9 @@
 	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
 	<script type="text/javascript" src="js/prefixfree.min.js"></script>
 	<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="js/hover.js"></script>
+    <script type="text/javascript" src="js/bkcolor.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -20,9 +22,9 @@
             <div class="bg">
             <ul class="menu nav line">
                 <li class="mainon li"><a href="#">ABOUT</a></li>
-                <li><a href="#">SERVICES</a></li>
-                <li><a href="#">PORTFOLIO</a></li>
-                <li><a href="#">CONTACT</a></li>
+                <li><a href="#SERVICES">SERVICES</a></li>
+                <li><a href="#PORTFOLIO">PORTFOLIO</a></li>
+                <li><a href="#CONTACT">CONTACT</a></li>
                 <div class="effect"></div>
             </ul>
             </div>
@@ -41,7 +43,7 @@
             </div>
         </section>
         <!--second area-->
-        <section class="contents info_area">
+        <section id="SERVICES" class="contents info_area">
             <div class="section_info">
                 <ul class="box_info">
                     <li>
@@ -84,7 +86,7 @@
             </div>
         </section>
         <!--third area :-->
-        <section class="contents company_history_area">
+        <section id="PORTFOLIO" class="contents company_history_area">
             <div class="pf_wrap">
                 <div class="ci_box">
                     <ul>
@@ -105,12 +107,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class="pf_box">
-                    <ul>
-                        <li class="pf_list">
+                <div id="portfolio-box-wrapper" class="pf_box">
+                    <ul class="portfolio-box">
+                        <li class="pf_list portfolio">
                             <div>
                                 <div class="pf_link">
-                                    <img src="./images/link_white.png" width="23" />
+                                    <a class="pf_linka" href="#"><img class="link_img" src="./images/link_white.png" width="23" /></a>
                                 </div>
                                 <div class="pf_box2">
                                     <dl>
@@ -127,10 +129,10 @@
                                 </span>
                             </div>
                         </li>
-                        <li class="pf_list">
+                        <li class="pf_list portfolio">
                             <div>
                                 <div class="pf_link">
-                                    <img src="./images/link_white.png" width="23" />
+                                    <a class="pf_linka" href="#"><img class="link_img" src="./images/link_white.png" width="23" /></a>
                                 </div>
                                 <div class="pf_box2">
                                     <dl>
@@ -148,13 +150,11 @@
                             </div>
                         </li>
                     </ul>
-                </div>
-                <div class="pf_box">
-                    <ul>
-                        <li class="pf_list">
+                    <ul class="portfolio-box">
+                        <li class="pf_list portfolio">
                             <div>
                                 <div class="pf_link">
-                                    <img src="./images/link_white.png" width="23" />
+                                    <a class="pf_linka" href="#"><img class="link_img" src="./images/link_white.png" width="23" /></a>
                                 </div>
                                 <div class="pf_box2">
                                     <dl>
@@ -171,10 +171,10 @@
                                 </span>
                             </div>
                         </li>
-                        <li class="pf_list">
+                        <li class="pf_list portfolio">
                             <div>
                                 <div class="pf_link">
-                                    <img src="./images/link_white.png" width="23" />
+                                    <a class="pf_linka" href="#"><img class="link_img" src="./images/link_white.png" width="23" /></a>
                                 </div>
                                 <div class="pf_box2">
                                     <dl>
@@ -199,7 +199,7 @@
         </div>
         </section>
         <!--four area : map-->
-        <section class="contents map_area">
+        <section id="CONTACT" class="contents map_area">
             <div class="wrap_map">
                 <img src="./images/map.png" />
             </div>
