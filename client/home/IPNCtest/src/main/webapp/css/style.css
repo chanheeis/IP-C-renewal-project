@@ -52,21 +52,17 @@ header{
     z-index:2;
 }
 section {
-    width:100%; height:600px;
+    width:100%;
+    height:100% !important;
     position:relative;
     overflow:hidden;
     position:relative;
     z-index:1;
 
 }
-
-.hidden {
-	display:none;
-}
-
 .main_area{background:#666}
 .info_area{background:#fff;}
-.company_history_area{background:#EFE6E6;}
+.company_history_area{background:#EFE6E6; }
 .map_area{background:#fff; height:800px !important}
 footer{
     background: #EFE6E6;
@@ -104,7 +100,7 @@ section.contents.main_area {}
 .main_txt2 {font-family: Arial, Helvetica, sans-serif; font-size:2.3em;}
 
 /* about */
-.section_info {width:940px;margin: 5%  auto;}
+.section_info {width:940px;margin:170px auto 0;}
 .box_info li{
 	    width: 49%;
 	    display: inline-block;
@@ -124,33 +120,27 @@ section.contents.main_area {}
 
 /* portfolio */
 
-.pf_wrap {position:relative; width:930px; margin:80px auto auto}
+.pf_wrap {position:relative; width:930px; margin:80px auto 0;}
+
+.pf_wrap .ci_box li {display:inline-block; box-sizing:border-box; width:19%; margin-bottom:60px}
+
 .pf_list {display: inline-block;width:410px;height:550px;color:#fff;box-shadow:1px 1px 16px #C5C5C5;background-color:#F2BFBF;vertical-align: top;}
 .pf_list:nth-child(2n) {
-    margin-top: 150px;
+    margin-top: 180px;
+    margin-left: 90px;
 }
-.pf_list:nth-child(3) {position:absolute;left:0;top:800px; background-color:#E6B1B1}
-.pf_list:nth-child(4) {position:absolute;right:0;top:1000px; background-color:#E2A8A8}
-.pf_link img {width:23px; height:23px; float:right}
-.pf_box2 {width:280px; height:220px; text-align:center; margin:0 auto; padding-top:160px}
+.pf_link img {width:23px; height:23px; float:right; cursor:pointer}
+.pf_link a:hover {}
+.pf_box2 {width:280px; height:350px; text-align:center; margin:0 auto; padding-top:160px}
 .pf_box2 .pf_title {font-size:33px; font-weight:bold}
 .pf_box2 .pf_datail:before {content:"_______\A\A"; white-space: pre; height:20px}
 .pf_box2 .pf_datail {font-size:18px;}
-.pf_date {position:static;left:0;bottom:5px; width:100%; font-size:14px; text-align:center}
+.pf_date {display:inline-block; width:100%; font-size:14px; text-align:center}
+
 
 /* contact */
 
 .wrap_map {width:900px; margin:140px auto 0;}
-
-/* contact Inform Popup */
-
-.wrap {position: absolute;left: 0;bottom: 40px;width: 90px;height: 50px;margin-left:-44px;text-align: left;overflow: hidden;}
-.wrap * {padding: 0;margin: 0;}
-.wrap .info {width: 90px;height: 25px;padding:7px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;font-size: 18px;font-weight: bold;}
-.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-.info .close:hover {cursor: pointer;}
-.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-
 
 /* footer */
 
@@ -168,7 +158,7 @@ section.contents.main_area {}
 .btn_area{
     margin-top:100px;
     width:930px;
-    height:100px;
+    height:70px;
     text-align: center;
     margin:0 auto;
 }
@@ -194,22 +184,38 @@ section.contents.main_area {}
 	width: 40%;
 	left: 50%;
 	margin-left: -20%; /* half of width */
-	height: 300px;
+	height: 500px;
 	top: 50%;
-	margin-top: -150px; /* half of height */
-	overflow: auto;
+	margin-top: -210px; /* half of height */
+	overflow: hidden;
 	z-index:1000;
 	
 	/* decoration */
-	border: 1px solid #000;
 	background-color: #eee;
 	padding: 1em;
 	box-sizing: border-box;
+	border-radius: 20px;
+	box-shadow: 15px 15px 15px 15px rgba(0, 0, 0, 0,7); 
+}
+.modal img {
+	width:100%;
+	height:100%
+}
+#modal_bg {
+  display:none;
+  position:fixed; 
+  z-index:10;
+  width:100%; height:100%;
+  top:0; left:0; 
+  background:rgba(0,0,0,0.4);
 }
 .modal h2 {
   margin:0;   
 }
 .modal button {
+	position:absolute;
+	right:15px;
+	top:15px;
   display:inline-block;
   width:100px;
   margin-left:calc(100% - 100px - 10px);
@@ -231,4 +237,8 @@ section.contents.main_area {}
   height:100%;
   background:rgba(0, 0, 0, 0.5);
   z-index:-1;
+}
+
+.hidden {
+	display:none;
 }

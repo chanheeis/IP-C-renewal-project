@@ -16,21 +16,22 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b8a6b61f2cce228fc7e6b3723a5ff84&libraries=services"></script>
 <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="js/prefixfree.min.js"></script>
-<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<!-- <script type="text/javascript" src="js/prefixfree.min.js"></script> -->
 <script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/hover.js"></script>
+<script type="text/javascript" src="js/bkcolor.js"></script>
 </head>
 
 <body>
 	<div id="wrap">
+	<div id="modal_bg"></div>
 		<header>
 			<div class="bg">
 				<ul class="menu nav line">
 					<li class="mainon li"><a href="#">ABOUT</a></li>
-					<li><a href="#">SERVICES</a></li>
-					<li><a href="#">PORTFOLIO</a></li>
-					<li><a href="#">CONTACT</a></li>
+					<li><a href="#SERVICES">SERVICES</a></li>
+					<li><a href="#PORTFOLIO">PORTFOLIO</a></li>
+					<li><a href="#CONTACT">CONTACT</a></li>
 					<div class="effect"></div>
 				</ul>
 			</div>
@@ -47,7 +48,7 @@
 			</div>
 		</section>
 		<!--second area-->
-		<section class="contents info_area">
+		<section id="SERVICES" class="contents info_area">
 			<div class="section_info">
 				<ul class="box_info">
 					<li>
@@ -94,24 +95,40 @@
 		<!--third area :-->
 		<c:forEach var="list" items="${resultList}" varStatus="status">
 			<c:if test="${status.first}">
-				<section class="content company_history_area">
-			</c:if>
-			<c:if test="${!status.first}">
-				<section class="content company_history_area hidden">
-			</c:if>
+				<section id="PORTFOLIO" class="content company_history_area">
 					<div class="pf_wrap">
 						<div class="ci_box">
 							<ul>
-								<li><img src="" /></li>
-							</ul>
+		                        <li>
+		                            <img src="images/logo.png" />
+		                        </li>
+		                        <li>
+		                            <img src="images/logo.png" />
+		                        </li>
+		                        <li>
+		                            <img src="images/logo.png" />
+		                        </li>
+		                        <li>
+		                            <img src="images/logo.png" />
+		                        </li>
+		                        <li>
+		                            <img src="images/logo.png" />
+		                        </li>
+		                    </ul>
 						</div>
-						<div class="pf_box">
-							<ul>
+			</c:if>
+			<c:if test="${!status.first}">
+				<section id="PORTFOLIO" class="content company_history_area hidden">
+					<div class="pf_wrap">
+			</c:if>
+					
+						<div id="portfolio-box-wrapper" class="pf_box">
+							<ul class="portfolio-box">
 								<c:forEach var="data" items="${list}">
-									<li class="pf_list">
+									<li class="pf_list portfolio">
 										<div>
 											<div class="pf_link">
-												<img src="./images/link_white.png" width="23" onclick="javascript:fn_popup('${data.image_url}')"/>
+												<a class="pf_linka"><img class="link_img" src="./images/link_white.png" width="23" onclick="javascript:fn_popup('${data.image_url}')"/></a>
 											</div>
 											<div class="pf_box2">
 												<dl>
@@ -139,7 +156,7 @@
 		</c:forEach>
 
 		<!--four area : map-->
-		<section class="contents map_area">
+		<section id="CONTACT" class="contents map_area">
 			<div id="comp_map" class="wrap_map" style="height: 70%;"></div>
 		</section>
 		<!--footer-->
@@ -161,7 +178,7 @@
 		</footer>
 	</div>
 	<div class="modal hidden">
-        <img class="modal_img">
+        <img class="modal_img" src="https://www.ipnc.kr/?lightbox=dataItem-jrty6nxt">
         <button onclick="fn_modal_close()">모달 창 닫기</button>
 	</div>
 </body>
@@ -275,11 +292,13 @@
 		var imgUrl = fileNm;
 		$('.modal_img').attr('src',fileNm);
 		$('.modal').removeClass('hidden');
+		$('#modal_bg').fadeIn(300);
 	}
 	
 	//portfolio 팝업 닫기
 	function fn_modal_close(){
 		$('.modal').addClass('hidden');
+		$('#modal_bg').fadeOut(300);
 	}
 </script>
 </html>

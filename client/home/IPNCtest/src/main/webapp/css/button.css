@@ -722,7 +722,11 @@
 	color:#f2b4b4
 }
 .bttn-material-circle.bttn-primary {
-	background:#f2b4b4;
+	background:#e5c0c0;
+	color:#fff
+}
+.bttn-material-circle.bttn-primary:hover {
+	background:#ec8282;
 	color:#fff
 }
 .bttn-material-circle.bttn-warning {

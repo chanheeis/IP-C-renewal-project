@@ -2,7 +2,7 @@ $(document).ready(function(){
     var ht=$(window).height();
     $('section').height(ht);
 //클릭시
-    $('.menu li').on("click",function(e){
+/*    $('.menu li').on("click",function(e){
         $('.menu li').removeClass("on");
         $(this).addClass("on");
         
@@ -19,7 +19,7 @@ $(document).ready(function(){
         $("html,body").stop().animate({"scrollTop":nowTop},1400);
         
         
-    });
+    });*/
     //브라우저가 리사이즈 될 때마다 브라우저와 section의 높이값읗 갱신 
     $(window).on("resize",function(){
       var ht=$(window).height();

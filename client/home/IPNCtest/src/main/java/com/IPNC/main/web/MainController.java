@@ -34,8 +34,10 @@ public class MainController {
 		historyList = (List) dao.selectHistory("");
 		
 		int size = 0;	
+		boolean flg = true;
 		
 		if(historyList.size()%2 != 0) {
+			flg = false;
 			size = historyList.size()+1;
 		}else {
 			size = historyList.size();
@@ -45,7 +47,13 @@ public class MainController {
 
 			List<Map<String, Object>> tempList = new ArrayList<Map<String, Object>>();
 			tempList.add(historyList.get(i*2));
-			tempList.add(historyList.get(i*2+1));
+			if(i < size/2 -1) {
+				tempList.add(historyList.get(i*2+1));
+			}else {
+				if(flg) {
+					tempList.add(historyList.get(i*2+1));					
+				}
+			}
 			
 			result.add(tempList);
 
@@ -56,14 +64,6 @@ public class MainController {
 		model.addAttribute("resultList", result);
 
 		return "main";
-	}
-	
-	@RequestMapping(value = "/popupPortfolio.do", method = RequestMethod.GET)
-	public String popupPortfolio(Model model, HttpServletRequest request, HttpServletResponse response) {
-
-		
-
-		return "popup/popupPortfolio";
 	}
 
 }

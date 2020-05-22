@@ -6,11 +6,13 @@
 		SELECT now()
 	</select>
 	
-	<!--데이터 조회 -->
+	<!--portfolio-->
 	<select id="selectHistory" resultType="map">
-		SELECT title AS HIST_TITLE,
+		SELECT id,
+			   title AS HIST_TITLE,
 			   subtitle AS HIST_CONTENT,
-			   date_format(date,  '%Y.%m.%d') AS HIST_DATE
+			   date_format(date,  '%Y.%m.%d') AS HIST_DATE,
+			   image_url
 		  FROM PORTFOLIO
 		 WHERE 1=1
 		 <if test="HIST_CONTENT != null and HIST_CONTENT != ''">
