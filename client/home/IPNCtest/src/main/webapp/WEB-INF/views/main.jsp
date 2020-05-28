@@ -126,9 +126,9 @@
 							<ul class="portfolio-box">
 								<c:forEach var="data" items="${list}">
 									<li class="pf_list portfolio">
-										<div>
+										<div style="cursor:pointer;" onclick="javascript:fn_popup('${data.image_url}')">
 											<div class="pf_link">
-												<a class="pf_linka"><img class="link_img" src="./images/link_white.png" width="23" onclick="javascript:fn_popup('${data.image_url}')"/></a>
+												<a class="pf_linka" href="http://www.naver.com" target="_blank"><img class="link_img" src="./images/link_white.png" width="23"/></a>
 											</div>
 											<div class="pf_box2">
 												<dl>
@@ -161,25 +161,29 @@
 		</section>
 		<!--footer-->
 		<footer>
-			<div class="wrap_footer">
-				<div class="box_footer">
-					<div class="footer_logo">
-						<img src="./images/logo.png" />
-					</div>
-					<div class="footer_info">
-						<p>
-							주소 : 인천광역시 연수구 갯벌로 12, 갯벌타워 803호 대표전화 : 032)203-8533<br /> 팩스 :
-							032)203-8530​ E-mail : 76skm@daum.net
-						</p>
-					</div>
-				</div>
-				<p class="Copyright">Copyright © IP&C. All Rights Reserved.</p>
-			</div>
-		</footer>
+            <div class="wrap_footer">
+                <div class="box_footer">
+                    <div class="footer_logo">
+                        <img src="./images/logo.png" />
+                    </div>
+                    <div class="footer_info">
+                        <p>
+                            주소 : 인천광역시 연수구 갯벌로 12, 갯벌타워 803호               대표전화 : 032)203-8533<br />
+                            팩스 : 032)203-8530              E-mail : 76skm@daum.net
+                        </p>
+                        <a href="https://www.youtube.com/channel/UC_0qnHJBf5pobS5BKrH3q1g" target="_blank"><img class="sns" src="images/sns_youtube.png" width="30px" height="30px" /></a>
+                        <a href=""><img class="sns" src="images/sns_facebook.png" width="25px" height="25px" /></a>
+                        <a href="https://blog.naver.com/ipnc16" target="_blank"><img class="sns" src="images/sns_naver.png" width="25px" height="25px" /></a>
+                        <a href=""><img class="sns" src="images/sns_insta.png" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+                <p class="Copyright">Copyright © IP&C. All Rights Reserved.</p>
+            </div>
+        </footer>
 	</div>
 	<div class="modal hidden">
         <img class="modal_img" src="https://www.ipnc.kr/?lightbox=dataItem-jrty6nxt">
-        <button onclick="fn_modal_close()">모달 창 닫기</button>
+        <button onclick="fn_modal_close()"><img src="https://image.flaticon.com/icons/svg/1828/1828774.svg" width="30px" height="30px" /></button>
 	</div>
 </body>
 
@@ -202,6 +206,17 @@
 
 	// 마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+	
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new kakao.maps.MapTypeControl();
+
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 	function markerInform() {
 		var content = '<div class="wrap">'
@@ -290,7 +305,9 @@
 	//portfolio 팝업
 	function fn_popup(fileNm){
 		var imgUrl = fileNm;
-		$('.modal_img').attr('src',fileNm);
+		//$('.modal_img').attr('src','/filepath/background.png');
+		//$('.modal_img').attr('src','/img/background.png');
+		$('.modal_img').attr('src','/var/lib/tomcat8/webapps/FilsUploads/'+fileNm);
 		$('.modal').removeClass('hidden');
 		$('#modal_bg').fadeIn(300);
 	}

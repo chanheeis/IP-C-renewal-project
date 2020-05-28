@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainMapper">
+	<select id="selectTime" resultType="String">
+		SELECT now()
+	</select>
+	
+	<!--portfolio-->
+	<select id="selectHistory" resultType="map">
+		SELECT id,
+			   title AS HIST_TITLE,
+			   subtitle AS HIST_CONTENT,
+			   date_format(date,  '%Y.%m.%d') AS HIST_DATE,
+			   image_url
+		  FROM PORTFOLIO
+		 WHERE 1=1
+		 <if test="HIST_CONTENT != null and HIST_CONTENT != ''">
+		 	AND subtitle = #{HIST_CONTENT}
+		 </if>
+	</select>
+	
+</mapper>

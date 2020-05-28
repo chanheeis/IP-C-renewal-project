@@ -6,7 +6,7 @@
 	<artifactId>IPNC</artifactId>
 	<name>IPNCtest</name>
 	<packaging>war</packaging>
-	<version>1.0.0-BUILD-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<properties>
 		<java-version>1.8</java-version>
 		<org.springframework-version>4.3.8.RELEASE</org.springframework-version>
@@ -82,6 +82,13 @@
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-catalina</artifactId>
+            <version>8.0.18</version>
+            <scope>provided</scope>
+        </dependency>
 
 		<!-- @Inject -->
 		<dependency>
